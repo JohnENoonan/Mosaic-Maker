@@ -12,9 +12,8 @@ class Point:
 	def __init__(self, x_,y_):
 		self.x = x_
 		self.y = y_
-		self.coord = (self.x, self.y)
 
-	# return euclidean distance between two points
+	# return euclidean distance between this and another Point object
 	def distance(self, p2):
 		return np.sqrt((p2.x - self.x)**2 + (p2.y - self.y)**2)
 
@@ -29,11 +28,19 @@ class Point:
 		radius = min_distance + random.uniform(0,min_distance)
 		return Point(int(round(self.x + radius*np.cos(angle))), int(round(self.y + radius*np.sin(angle))))
 
-	# calculate grid position in grid based on point
+	# calculate grid position in Grid2d based on point
 	def convert_point_to_grid(self, cell_size):
 		gridX = int((self.x / cell_size));
 		gridY = int((self.y / cell_size));
 		return (gridY, gridX)
+
+	# returns x and y coordinates separately
+	def get_xy(self):
+		return self.x, self.y
+
+	# get tuple of coordinates used for OpenCV
+	def get_coord(self):
+		return (self.x, self.y)
 
 	# print operator overload
 	def __str__(self):
